@@ -2,17 +2,17 @@ __command() -> (
 	help()
 );
 __config() -> m( l('stay_loaded', true)); 
-global_version = 'Version: 0.0.0-dev.20200121.0824';
+global_version = 'Version: 0.0.0-dev.20200127.1201';
 global_tag = 'carpetBot';
 global_bot_state = m();
 __check_offline(player_name) ->(
 	f_player = player(player_name);
 	if (!f_player, 
-		exit('¡ì4¼ÙÈË'+player_name+'Î´ÔÚÏß');
+		exit('Â§4å‡äºº'+player_name+'æœªåœ¨çº¿');
 		''
 	);
 	if (!query(f_player,'has_tag',global_tag), 
-		exit('¡ì4'+f_player+'²»ÊÇ¼ÙÈË');
+		exit('Â§4'+f_player+'ä¸æ˜¯å‡äºº');
 		''
 	)
 );
@@ -20,17 +20,17 @@ __check_online(player_name) ->(
 	f_player = player(player_name);
 	if (f_player,
 		if (query(f_player,'has_tag',global_tag), 
-			exit('¡ì4¼ÙÈË'+f_player+'ÒÑ¾­ÔÚÏßÁË');
+			exit('Â§4å‡äºº'+f_player+'å·²ç»åœ¨çº¿äº†');
 			''
 		);
-		exit('¡ì4Íæ¼Ò'+f_player+'ÒÑ¾­ÔÚÏßÁË');
+		exit('Â§4ç©å®¶'+f_player+'å·²ç»åœ¨çº¿äº†');
 		''
 	)
 );
 __check_pos(x) ->(
 	x = number(x);
 	if(x == null,
-		exit('¡ì4ÇëÊäÈëÕıÈ·µÄ×ø±ê');
+		exit('Â§4è¯·è¾“å…¥æ­£ç¡®çš„åæ ‡');
 		''
 	);
 	return(x)
@@ -38,29 +38,29 @@ __check_pos(x) ->(
 __check_tick(tick) ->(
 	tick = round(number(tick));
 	if(tick == null,
-		exit('¡ì4ÇëÊäÈëÕıÈ·µÄÓÎÏ·¿Ì¼ä¸ô');
+		exit('Â§4è¯·è¾“å…¥æ­£ç¡®çš„æ¸¸æˆåˆ»é—´éš”');
 		''
 	);
 	if(tick < 2,
 		print(tick);
-		exit(str('¡ì4ÕûÊı²»ÄÜĞ¡ÓÚ2£¬È´·¢ÏÖÁË%d',tick));
+		exit(str('Â§4æ•´æ•°ä¸èƒ½å°äº2ï¼Œå´å‘ç°äº†%d',tick));
 		''
 	);
 	return(tick)
 );
 __check_dim(s_player,f_player) ->(
 	if (s_player~'dimension' != f_player~'dimension',
-		exit('¡ì4²»ÔÚÍ¬Ò»Î¬¶È£¡');
+		exit('Â§4ä¸åœ¨åŒä¸€ç»´åº¦ï¼');
 		''
 	);
 );
 __player_list(i,player_list) ->(
 	one_player_list = split(' ',join('',slice(player_list,i,i+1)));
-	if(slice(one_player_list,0,1) == l('¼ÙµÄ'),
+	if(slice(one_player_list,0,1) == l('å‡çš„'),
 		one_player_str = join('',slice(one_player_list,1,2));
 		''
 	);
-	if(slice(one_player_list,0,1) != l('¼ÙµÄ'),
+	if(slice(one_player_list,0,1) != l('å‡çš„'),
 		one_player_str = join('',one_player_list);
 		''
 	);
@@ -74,33 +74,33 @@ __on_statistic(player, category, stat, value) ->(
 	)
 );
 help() ->(
-	print('--Ê¹ÓÃ°ïÖú(/tagplayer)£º');
-	print('/tagplayer summon <Íæ¼ÒÃû>\n-Éú³É¼ÙÈË');
-	print('/tagplayer kill <Íæ¼ÒÃû>\n-É¾³ı¼ÙÈË');
-	print('/tagplayer killall\n-É¾³ıÈ«²¿¼ÙÈË');
-	print('/tagplayer tp <Íæ¼ÒÃû> <x> <y> <z>\n-´«ËÍ¼ÙÈË£¬<x>¡¢<y>¡¢<z>¿ÉÌæ»»Îª¡°s¡±À´´ú±íÄãµÄÎ»ÖÃ');
-	print('/tagplayer tp_at_<²ÎÊı> <Íæ¼ÒÃû> <x> <y> <z>\n-ÒÔ<¼ÙÈË/Íæ¼Ò>Îª×ø±êÔ­µã´«ËÍ¼ÙÈË');
-	print('/tagplayer check <Íæ¼ÒÃû>\n-¼ì²é¼ÙÈË×´Ì¬');
-	print('/tagplayer checkall\n- ¼ì²éËùÓĞ¼ÙÈË×´Ì¬');
-	print('/tagplayer look <Íæ¼ÒÃû> <Ñö¸©> <Æ«º½>\n-×ª¶¯¼ÙÈËÊÓ½Ç£¬<x>¡¢<y>¿ÉÌæ»»Îª¡°s¡±À´´ú±íÄãµÄÊÓ½Ç·½Ïò');
-	print('/tagplayer look_<up/down/east/west/south/north> <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈËÏò<ÉÏ/ÏÂ/¶«/Î÷/ÄÏ/±±>·½Ïò¿´');
-	print('/tagplayer turn_<back/left/right> <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈËÏò<ºó/×ó/ÓÒ>·½Ïò¿´');
-	print('/tagplayer move_<backward/forward/left/right/stop> <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈË<ÏòÇ°/Ïòºó/Ïò×ó/ÏòÓÒ/Í£Ö¹>ÒÆ¶¯');
-	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_continuous <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈË³ÖĞø<¹¥»÷»òÍÚ¾ò/¶ªÒ»¸öÎïÆ·/¶ªÒ»×éÎïÆ·/ÌøÔ¾/»»ÊÖ/Ê¹ÓÃÎïÆ·>');
-	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_interval <Íæ¼ÒÃû> <ÕûÊı>\n-ÈÃ¼ÙÈËÃ¿<ÕûÊı>ÓÎÏ·¿Ì<¹¥»÷/¶ªÒ»¸öÎïÆ·/¶ªÒ»×éÎïÆ·/ÌøÔ¾/»»ÊÖ/Ê¹ÓÃÎïÆ·>Ò»´Î');
-	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_once <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈË<¹¥»÷»òÍÚ¾ò/¶ªÒ»¸öÎïÆ·/¶ªÒ»×éÎïÆ·/ÌøÔ¾/»»ÊÖ/Ê¹ÓÃÎïÆ·>Ò»´Î');
-	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_stop <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈËÍ£Ö¹<¹¥»÷»òÍÚ¾ò/¶ªÒ»¸öÎïÆ·/¶ªÒ»×éÎïÆ·/ÌøÔ¾/»»ÊÖ/Ê¹ÓÃÎïÆ·>£¬Èç¹ûÃ»ÓĞ¶¯×÷ÔòºÍ<²ÎÊı>_once¹¦ÄÜÒ»ÖÂ');
-	print('/tagplayer <sneak/unsneak> <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈË<Ç±ĞĞ/Õ¾Á¢>');
-	print('/tagplayer <sprint/unsprint> <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈË×¼±¸<¼²ÅÜ/ĞĞ×ß>£¬ÔÚË®ÖĞ¼²ÅÜÒÔÓÎÓ¾');
-	print('/tagplayer <mount/dismount> <Íæ¼ÒÃû>\n-ÈÃ¼ÙÈË<³Ë×ø/Ğ¶ÏÂ>');
-	print('/tagplayer stop <Íæ¼ÒÃû>\n-Í£Ö¹¼ÙÈËµÄÒ»ÇĞ¶¯×÷');
+	print('--ä½¿ç”¨å¸®åŠ©(/tagplayer)ï¼š');
+	print('/tagplayer summon <ç©å®¶å>\n-ç”Ÿæˆå‡äºº');
+	print('/tagplayer kill <ç©å®¶å>\n-åˆ é™¤å‡äºº');
+	print('/tagplayer killall\n-åˆ é™¤å…¨éƒ¨å‡äºº');
+	print('/tagplayer tp <ç©å®¶å> <x> <y> <z>\n-ä¼ é€å‡äººï¼Œ<x>ã€<y>ã€<z>å¯æ›¿æ¢ä¸ºâ€œsâ€æ¥ä»£è¡¨ä½ çš„ä½ç½®');
+	print('/tagplayer tp_at_<å‚æ•°> <ç©å®¶å> <x> <y> <z>\n-ä»¥<å‡äºº/ç©å®¶>ä¸ºåæ ‡åŸç‚¹ä¼ é€å‡äºº');
+	print('/tagplayer check <ç©å®¶å>\n-æ£€æŸ¥å‡äººçŠ¶æ€');
+	print('/tagplayer checkall\n- æ£€æŸ¥æ‰€æœ‰å‡äººçŠ¶æ€');
+	print('/tagplayer look <ç©å®¶å> <ä»°ä¿¯> <åèˆª>\n-è½¬åŠ¨å‡äººè§†è§’ï¼Œ<x>ã€<y>å¯æ›¿æ¢ä¸ºâ€œsâ€æ¥ä»£è¡¨ä½ çš„è§†è§’æ–¹å‘');
+	print('/tagplayer look_<up/down/east/west/south/north> <ç©å®¶å>\n-è®©å‡äººå‘<ä¸Š/ä¸‹/ä¸œ/è¥¿/å—/åŒ—>æ–¹å‘çœ‹');
+	print('/tagplayer turn_<back/left/right> <ç©å®¶å>\n-è®©å‡äººå‘<å/å·¦/å³>æ–¹å‘çœ‹');
+	print('/tagplayer move_<backward/forward/left/right/stop> <ç©å®¶å>\n-è®©å‡äºº<å‘å‰/å‘å/å‘å·¦/å‘å³/åœæ­¢>ç§»åŠ¨');
+	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_continuous <ç©å®¶å>\n-è®©å‡äººæŒç»­<æ”»å‡»æˆ–æŒ–æ˜/ä¸¢ä¸€ä¸ªç‰©å“/ä¸¢ä¸€ç»„ç‰©å“/è·³è·ƒ/æ¢æ‰‹/ä½¿ç”¨ç‰©å“>');
+	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_interval <ç©å®¶å> <æ•´æ•°>\n-è®©å‡äººæ¯<æ•´æ•°>æ¸¸æˆåˆ»<æ”»å‡»/ä¸¢ä¸€ä¸ªç‰©å“/ä¸¢ä¸€ç»„ç‰©å“/è·³è·ƒ/æ¢æ‰‹/ä½¿ç”¨ç‰©å“>ä¸€æ¬¡');
+	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_once <ç©å®¶å>\n-è®©å‡äºº<æ”»å‡»æˆ–æŒ–æ˜/ä¸¢ä¸€ä¸ªç‰©å“/ä¸¢ä¸€ç»„ç‰©å“/è·³è·ƒ/æ¢æ‰‹/ä½¿ç”¨ç‰©å“>ä¸€æ¬¡');
+	print('/tagplayer <attack/drop/drop_stack/jump/swap_hands/use>_stop <ç©å®¶å>\n-è®©å‡äººåœæ­¢<æ”»å‡»æˆ–æŒ–æ˜/ä¸¢ä¸€ä¸ªç‰©å“/ä¸¢ä¸€ç»„ç‰©å“/è·³è·ƒ/æ¢æ‰‹/ä½¿ç”¨ç‰©å“>ï¼Œå¦‚æœæ²¡æœ‰åŠ¨ä½œåˆ™å’Œ<å‚æ•°>_onceåŠŸèƒ½ä¸€è‡´');
+	print('/tagplayer <sneak/unsneak> <ç©å®¶å>\n-è®©å‡äºº<æ½œè¡Œ/ç«™ç«‹>');
+	print('/tagplayer <sprint/unsprint> <ç©å®¶å>\n-è®©å‡äººå‡†å¤‡<ç–¾è·‘/è¡Œèµ°>ï¼Œåœ¨æ°´ä¸­ç–¾è·‘ä»¥æ¸¸æ³³');
+	print('/tagplayer <mount/dismount> <ç©å®¶å>\n-è®©å‡äºº<ä¹˜å/å¸ä¸‹>');
+	print('/tagplayer stop <ç©å®¶å>\n-åœæ­¢å‡äººçš„ä¸€åˆ‡åŠ¨ä½œ');
 	print(global_version);
 	''
 );
 reload() ->(
 	run(str('script unload tagplayer'));
 	run(str('script load tagplayer'));
-	run(str('tellraw @a {"text":"tagplayerÖØÔØ³É¹¦£¡"}'));
+	run(str('tellraw @a {"text":"tagplayeré‡è½½æˆåŠŸï¼"}'));
 	''
 );
 summon(player_name) ->(
@@ -108,10 +108,10 @@ summon(player_name) ->(
 	s_player = player();
 	run(str('player %s spawn at %f %f %f', player_name, s_player~'x', s_player~'y', s_player~'z'));
 	if (!(player(player_name)),
-		exit('¡ì4Éú³ÉÊ§°Ü')
+		exit('Â§4ç”Ÿæˆå¤±è´¥')
 	);
 	modify(player(player_name), 'tag', global_tag);
-	print('ÒÑÎª'+player_name+'Ìí¼Ó±êÇ©ºÍ¶ÓÎé');
+	print('å·²ä¸º'+player_name+'æ·»åŠ æ ‡ç­¾å’Œé˜Ÿä¼');
 	game_tick(50);
 	f_player = player(player_name);
 	global_bot_state:f_player = m();
@@ -121,7 +121,7 @@ kill(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s kill', player_name));
 	game_tick(50);
-	print('ÒÑÇå³ı'+player_name);
+	print('å·²æ¸…é™¤'+player_name);
 	''
 );
 killall() ->(
@@ -139,15 +139,15 @@ killall() ->(
 		i += 1
 	);
 	if(do_fake_player != 1,
-		exit('¡ì4²»´æÔÚ¼ÙÈË');
+		exit('Â§4ä¸å­˜åœ¨å‡äºº');
 		''
 	);
-	print('ÒÑ½«È«²¿¼ÙÈËÒÆ½»¡ì6FZ\'sDataPack¡ìfÇå³ı±êÇ©');
+	print('å·²å°†å…¨éƒ¨å‡äººç§»äº¤Â§6FZ\'sDataPackÂ§fæ¸…é™¤æ ‡ç­¾');
 	game_tick(50);
-	print('ÒÑÇå³ıÈ«²¿¼ÙÈË');
+	print('å·²æ¸…é™¤å…¨éƒ¨å‡äºº');
 	''
 );
-//¹¥»÷
+//æ”»å‡»
 attack_continuous(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s attack continuous', player_name));
@@ -173,7 +173,7 @@ attack_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'attack');
 	''
 );
-//¶ªÆú
+//ä¸¢å¼ƒ
 drop_continuous(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s drop continuous', player_name));
@@ -199,7 +199,7 @@ drop_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'drop');
 	''
 );
-//¶ªÆúÒ»×é
+//ä¸¢å¼ƒä¸€ç»„
 drop_stack_continuous(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s dropStack continuous', player_name));
@@ -225,7 +225,7 @@ drop_stack_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'drop_stack');
 	''
 );
-//ÌøÔ¾
+//è·³è·ƒ
 jump_continuous(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s jump continuous', player_name));
@@ -251,7 +251,7 @@ jump_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'jump');
 	''
 );
-//»»ÊÖ
+//æ¢æ‰‹
 swap_hands_continuous(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s swapHands continuous', player_name));
@@ -277,7 +277,7 @@ swap_hands_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'swap_hands');
 	''
 );
-//ÓÒ¼ü
+//å³é”®
 use_continuous(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s use continuous', player_name));
@@ -303,7 +303,7 @@ use_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'use');
 	''
 );
-//Æï³Ë
+//éª‘ä¹˜
 mount(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s mount', player_name));
@@ -314,7 +314,7 @@ dismount(player_name) ->(
 	run(str('player %s dismount', player_name));
 	''
 );
-//³å´Ì
+//å†²åˆº
 sprint(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s sprint', player_name));
@@ -325,7 +325,7 @@ unsprint(player_name) ->(
 	run(str('player %s unsprint', player_name));
 	''
 );
-//ÏÂ¶×
+//ä¸‹è¹²
 sneak(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s sneak', player_name));
@@ -336,7 +336,7 @@ unsneak(player_name) ->(
 	run(str('player %s unsneak', player_name));
 	''
 );
-//×ªÏò
+//è½¬å‘
 turn_back(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s turn back', player_name));
@@ -352,7 +352,7 @@ turn_right(player_name) ->(
 	run(str('player %s turn right', player_name));
 	''
 );
-//¿´Ïò
+//çœ‹å‘
 look(player_name,x,y) ->(
 	__check_offline(player_name);
 	s_player = player();
@@ -378,7 +378,7 @@ look(player_name,x,y) ->(
 	);
 	modify(player(player_name), 'yaw', x);
 	modify(player(player_name), 'pitch', y);
-	print(str('ÒÑ½«'+player_name+'µÄÊÓ½ÇÖ¸Ïò¡ìa[%.1f,%.1f]',x,y));
+	print(str('å·²å°†'+player_name+'çš„è§†è§’æŒ‡å‘Â§a[%.1f,%.1f]',x,y));
 	''
 );
 look_up(player_name) ->(
@@ -411,7 +411,7 @@ look_west(player_name) ->(
 	run(str('player %s look west', player_name));
 	''
 );
-//ÒÆ¶¯
+//ç§»åŠ¨
 move_backward(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s move backward', player_name));
@@ -442,13 +442,13 @@ move_stop(player_name) ->(
 	delete(global_bot_state:player(player_name):'move');
 	''
 );
-//Í£Ö¹
+//åœæ­¢
 stop(player_name) ->(
 	__check_offline(player_name);
 	run(str('player %s stop', player_name));
 	''
 );
-//´«ËÍ
+//ä¼ é€
 tp(player_name,x,y,z) ->(
 	__check_offline(player_name);
 	s_player = player();
@@ -468,12 +468,12 @@ tp(player_name,x,y,z) ->(
 	x = __check_pos(x);
 	y = __check_pos(y);
 	if(y>4096,
-		exit('¡ì4yÖµ²»ÄÜ³¬¹ı4096£¡');
+		exit('Â§4yå€¼ä¸èƒ½è¶…è¿‡4096ï¼');
 		''
 	);
 	z = __check_pos(z);
 	modify(f_player,'pos',x,y,z);
-	print(str('ÒÑ½«'+player_name+'´«ËÍÖÁ¡ìa[%.2f,%.2f,%.2f]',x,y,z));
+	print(str('å·²å°†'+player_name+'ä¼ é€è‡³Â§a[%.2f,%.2f,%.2f]',x,y,z));
 	''
 );
 tp_at_player(player_name,x,y,z) ->(
@@ -484,12 +484,12 @@ tp_at_player(player_name,x,y,z) ->(
 	x = s_player~'x'+__check_pos(x);
 	y = s_player~'y'+__check_pos(y);
 	if(y>4096,
-		exit('¡ì4yÖµ²»ÄÜ³¬¹ı4096£¡');
+		exit('Â§4yå€¼ä¸èƒ½è¶…è¿‡4096ï¼');
 		''
 	);
 	z = s_player~'z'+__check_pos(z);
 	modify(f_player,'pos',x,y,z);
-	print(str('ÒÑ½«'+player_name+'´«ËÍÖÁ¡ìa[%.2f,%.2f,%.2f]',x,y,z));
+	print(str('å·²å°†'+player_name+'ä¼ é€è‡³Â§a[%.2f,%.2f,%.2f]',x,y,z));
 	''
 );
 tp_at_bot(player_name,x,y,z) ->(
@@ -498,46 +498,46 @@ tp_at_bot(player_name,x,y,z) ->(
 	x = f_player~'x'+__check_pos(x);
 	y = f_player~'y'+__check_pos(y);
 	if(y>4096,
-		exit('¡ì4yÖµ²»ÄÜ³¬¹ı4096£¡');
+		exit('Â§4yå€¼ä¸èƒ½è¶…è¿‡4096ï¼');
 		''
 	);
 	z = f_player~'z'+__check_pos(z);
 	modify(f_player,'pos',x,y,z);
-	print(str('ÒÑ½«'+player_name+'´«ËÍÖÁ¡ìa[%.2f,%.2f,%.2f]',x,y,z));
+	print(str('å·²å°†'+player_name+'ä¼ é€è‡³Â§a[%.2f,%.2f,%.2f]',x,y,z));
 	''
 );
-//×´Ì¬¼ì²é
+//çŠ¶æ€æ£€æŸ¥
 check(player_name) ->(
 	__check_offline(player_name);
 	f_player = player(player_name);
-	print('¼ÙÈË¡°'+f_player+'¡±£º');
-	//ÑªÁ¿
+	print('å‡äººâ€œ'+f_player+'â€ï¼š');
+	//è¡€é‡
 	inner_health = number(str('%d',query(f_player,'health')+0.9));
 	if(inner_health <= 5,
-		inner_color = '¡ì4';
+		inner_color = 'Â§4';
 	);
 	if(inner_health > 5 && inner_health <= 10,
-		inner_color = '¡ìc';
+		inner_color = 'Â§c';
 	);
 	if(inner_health > 10 && inner_health <= 15,
-		inner_color = '¡ìe';
+		inner_color = 'Â§e';
 	);
 	if(inner_health > 15,
-		inner_color = '¡ìa';
+		inner_color = 'Â§a';
 	);
-	print('- ÑªÁ¿£º'+inner_color+inner_health);
-	//Î»ÖÃ
+	print('- è¡€é‡ï¼š'+inner_color+inner_health);
+	//ä½ç½®
 	if(f_player~'dimension' == 'overworld',
-		f_dimension = '¡ì2Ö÷ÊÀ½ç'
+		f_dimension = 'Â§2ä¸»ä¸–ç•Œ'
 	);
 	if(f_player~'dimension' == 'the_nether',
-		f_dimension = '¡ì4µØÓü'
+		f_dimension = 'Â§4åœ°ç‹±'
 	);
 	if(f_player~'dimension' == 'the_end',
-		f_dimension = '¡ì7Ä©µØ'
+		f_dimension = 'Â§7æœ«åœ°'
 	);
-	print(str('- Î»ÓÚ£º%s¡ìa[%.2f,%.2f,%.2f]',f_dimension,f_player~'x',f_player~'y',f_player~'z'));
-	//Ö¸Ïò
+	print(str('- ä½äºï¼š%sÂ§a[%.2f,%.2f,%.2f]',f_dimension,f_player~'x',f_player~'y',f_player~'z'));
+	//æŒ‡å‘
 	f_yaw = f_player~'yaw';
 	if(f_yaw > 180,
 		f_yaw = f_yaw - 360
@@ -546,211 +546,211 @@ check(player_name) ->(
 		f_yaw = f_yaw + 360
 	);
 	if(f_yaw > -112.5 && f_yaw <= -67.5,
-		f_yaw_curt = '¶«'
+		f_yaw_curt = 'ä¸œ'
 	);
 	if(f_yaw > -22.5 && f_yaw <= 22.5,
-		f_yaw_curt = 'ÄÏ'
+		f_yaw_curt = 'å—'
 	);
 	if(f_yaw > 67.5 && f_yaw <= 112.5,
-		f_yaw_curt = 'Î÷'
+		f_yaw_curt = 'è¥¿'
 	);
 	if(f_yaw > 157.5 || f_yaw <= -157.5,
-		f_yaw_curt = '±±'
+		f_yaw_curt = 'åŒ—'
 	);
 	if(f_yaw > -157.5 && f_yaw <= -112.5,
-		f_yaw_curt = '¶«±±'
+		f_yaw_curt = 'ä¸œåŒ—'
 	);
 	if(f_yaw > -67.5 && f_yaw <= -22.5,
-		f_yaw_curt = '¶«ÄÏ'
+		f_yaw_curt = 'ä¸œå—'
 	);
 	if(f_yaw > 112.5 && f_yaw <= 157.5,
-		f_yaw_curt = 'Î÷±±'
+		f_yaw_curt = 'è¥¿åŒ—'
 	);
 	if(f_yaw > 22.5 && f_yaw <= 67.5,
-		f_yaw_curt = 'Î÷ÄÏ'
+		f_yaw_curt = 'è¥¿å—'
 	);
 	f_pitch = f_player~'pitch';
 	if(f_pitch > -15 && f_pitch <= 15,
-		f_pitch_curt = 'Ç°·½'
+		f_pitch_curt = 'å‰æ–¹'
 	);
 	if(f_pitch > 15 && f_pitch <= 75,
-		f_pitch_curt = 'Ğ±ÏÂ·½'
+		f_pitch_curt = 'æ–œä¸‹æ–¹'
 	);
 	if(f_pitch > 75 && f_pitch <= 90,
-		f_pitch_curt = 'ÏÂ·½'
+		f_pitch_curt = 'ä¸‹æ–¹'
 	);
 	if(f_pitch > -75 && f_pitch <= -15,
-		f_pitch_curt = 'Ğ±ÉÏ·½'
+		f_pitch_curt = 'æ–œä¸Šæ–¹'
 	);
 	if(f_pitch >= -90 && f_pitch <= -75,
-		f_pitch_curt = 'ÉÏ·½'
+		f_pitch_curt = 'ä¸Šæ–¹'
 	);
-	print(str('- Ö¸Ïò£º¡ìe%s,%s¡ìa[%.1f,%.1f]',f_yaw_curt,f_pitch_curt,f_yaw,f_pitch));
+	print(str('- æŒ‡å‘ï¼šÂ§e%s,%sÂ§a[%.1f,%.1f]',f_yaw_curt,f_pitch_curt,f_yaw,f_pitch));
 	f_state = global_bot_state:f_player;
-	//Ç±ĞĞ/¼²ÅÜ/ÓÎÓ¾
+	//æ½œè¡Œ/ç–¾è·‘/æ¸¸æ³³
 	inner_sneak = query(f_player,'sneaking');
 	inner_sprint = query(f_player,'sprinting');
 	inner_swim = query(f_player,'swimming');
 	if(f_state == m() && inner_sneak == false && inner_sprint == false,
-		exit(
-			print('- ÎŞ¶¯×÷');
-			''
-		)
+		print('- æ— åŠ¨ä½œ');
+		''
 	);
-	//¹¥»÷/ÍÚ¾ò
-	if(f_state:'attack' != null,
-		if(f_state:'attack' == 1,
-			print('- ÕıÔÚ·è¿ñÊä³ö£¨È»²¢ÂÑ£©»òÍÚ¾ò')
-		);
-		if(f_state:'attack' > 1,
-			inner_sec = f_state:'attack'/20;
-			print('- Ã¿'+f_state:'attack'+'ÓÎÏ·¿Ì£¨'+inner_sec+'ÓÎÏ·Ãë£©³¢ÊÔ¹¥»÷Ò»´Î')
-		)
-	);
-	//ÈÓ¶«Î÷
-	if(f_state:'drop' != null,
-		inner_sec = f_state:'drop'/20;
-		print('- Ã¿'+f_state:'drop'+'ÓÎÏ·¿Ì£¨'+inner_sec+'ÓÎÏ·Ãë£©ÈÓ1¸öÎïÆ·')
-	);
-	if(f_state:'drop_stack' != null,
-		inner_sec = f_state:'drop_stack'/20;
-		print('- Ã¿'+f_state:'drop_stack'+'ÓÎÏ·¿Ì£¨'+inner_sec+'ÓÎÏ·Ãë£©ÈÓ1×éÎïÆ·')
-	);
-	//ÌøÔ¾
-	if(f_state:'jump' != null,
-		if(f_state:'jump' == 1,
-			print('- ÕıÔÚ³ÖĞøÌøÔ¾')
-		);
-		if(f_state:'jump' > 1,
-			inner_sec = f_state:'jump'/20;
-			print('- Ã¿'+f_state:'jump'+'ÓÎÏ·¿Ì£¨'+inner_sec+'ÓÎÏ·Ãë£©³¢ÊÔÌøÔ¾Ò»´Î')
-		)
-	);
-	//»»ÊÖ
-	if(f_state:'swap_hands' != null,
-		inner_sec = f_state:'swap_hands'/20;
-		print('- Ã¿'+f_state:'swap_hands'+'ÓÎÏ·¿Ì£¨'+inner_sec+'ÓÎÏ·Ãë£©½»»»Ò»´Î×óÓÒÊÖµÄÎïÆ·')
-	);
-	//Ê¹ÓÃÎïÆ·
-	if(f_state:'use' != null,
-		if(f_state:'use' == 1,
-			print('- ÕıÔÚ³ÖĞøÊ¹¡áÓÃÎïÆ·')
-		);
-		if(f_state:'use' > 1,
-			inner_sec = f_state:'use'/20;
-			print('- Ã¿'+f_state:'use'+'ÓÎÏ·¿Ì£¨'+inner_sec+'ÓÎÏ·Ãë£©³¢ÊÔÊ¹ÓÃÒ»´ÎÎï¡áÆ·')
-		)
-	);
-	//ÒÆ¶¯**********************************ÖØµã*********************************
-	if(f_state:'move_vertical' != null || f_state:'move_transverse' != null,
-		if(inner_sneak == true,
-			if(f_state:'move_vertical' == 'forward',
-				if(f_state:'move_transverse' == 'right',
-					print('- ÕıÔÚÏòÓÒÇ°·½Ç±ĞĞ¨J')
-				);
-				if(f_state:'move_transverse' == 'left',
-					print('- ÕıÔÚÏò×óÇ°·½Ç±ĞĞ¨I')
-				);
-				if(f_state:'move_transverse' == null,
-					print('- ÕıÔÚÏòÇ°Ç±ĞĞ¡ü');
-				)
+	if(f_state != m() || inner_sneak == true || inner_sprint == true,
+		//æ”»å‡»/æŒ–æ˜
+		if(f_state:'attack' != null,
+			if(f_state:'attack' == 1,
+				print('- æ­£åœ¨ç–¯ç‹‚è¾“å‡ºï¼ˆç„¶å¹¶åµï¼‰æˆ–æŒ–æ˜')
 			);
-			if(f_state:'move_vertical' == 'backward',
-				if(f_state:'move_transverse' == 'right',
-					print('- ÕıÔÚÏòÓÒºó·½Ç±ĞĞ¨K')
-				);
-				if(f_state:'move_transverse' == 'left',
-					print('- ÕıÔÚÏò×óºó·½Ç±ĞĞ¨L')
-				);
-				if(f_state:'move_transverse' == null,
-					print('- ÕıÔÚÏòºóÇ±ĞĞ¡ı');
-				)
+			if(f_state:'attack' > 1,
+				inner_sec = f_state:'attack'/20;
+				print('- æ¯'+f_state:'attack'+'æ¸¸æˆåˆ»ï¼ˆ'+inner_sec+'æ¸¸æˆç§’ï¼‰å°è¯•æ”»å‡»ä¸€æ¬¡')
 			)
 		);
-		if(inner_sprint == true,
-			if(inner_swim == true,
-				if(f_state:'move_vertical' == 'forward',
-					if(f_state:'move_transverse' == 'right',
-						print('- ÕıÔÚÏòÓÒÇ°·½ÓÎÓ¾¨J')
-					);
-					if(f_state:'move_transverse' == 'left',
-						print('- ÕıÔÚÏò×óÇ°·½ÓÎÓ¾¨I')
-					);
-					if(f_state:'move_transverse' == null,
-						print('- ÕıÔÚÏòÇ°ÓÎÓ¾¡ü');
-					)
-				);
-				if(f_state:'move_vertical' == 'backward',
-					if(f_state:'move_transverse' == 'right',
-						print('- ÕıÔÚÏòÓÒºó·½ÓÎÓ¾¨K')
-					);
-					if(f_state:'move_transverse' == 'left',
-						print('- ÕıÔÚÏò×óºó·½ÓÎÓ¾¨L')
-					);
-					if(f_state:'move_transverse' == null,
-						print('- ÕıÔÚÏòºóÓÎÓ¾¡ı');
-					)
-				)
-			);
-			if(inner_swim == false,
-				if(f_state:'move_vertical' == 'forward',
-					if(f_state:'move_transverse' == 'right',
-						print('- ÕıÔÚÏòÓÒÇ°·½¼²ÅÜ¨J')
-					);
-					if(f_state:'move_transverse' == 'left',
-						print('- ÕıÔÚÏò×óÇ°·½¼²ÅÜ¨I')
-					);
-					if(f_state:'move_transverse' == null,
-						print('- ÕıÔÚÏòÇ°¼²ÅÜ¡ü');
-					)
-				);
-				if(f_state:'move_vertical' == 'backward',
-					if(f_state:'move_transverse' == 'right',
-						print('- ÕıÔÚÏòÓÒºó·½¼²ÅÜ¨K¡ìe£¨Ã»´íËü¿ÉÒÔ¿ª¹Ò£©')
-					);
-					if(f_state:'move_transverse' == 'left',
-						print('- ÕıÔÚÏò×óºó·½¼²ÅÜ¨L¡ìe£¨Ã»´íËü¿ÉÒÔ¿ª¹Ò£©')
-					);
-					if(f_state:'move_transverse' == null,
-						print('- ÕıÔÚÏòºó¼²ÅÜ¡ı¡ìe£¨Ã»´íËü¿ÉÒÔ¿ª¹Ò£©');
-					)
-				)
-			);
-			
+		//æ‰”ä¸œè¥¿
+		if(f_state:'drop' != null,
+			inner_sec = f_state:'drop'/20;
+			print('- æ¯'+f_state:'drop'+'æ¸¸æˆåˆ»ï¼ˆ'+inner_sec+'æ¸¸æˆç§’ï¼‰æ‰”1ä¸ªç‰©å“')
 		);
-		if(inner_sprint == false && inner_sneak == false,
-			if(f_state:'move_vertical' == 'forward',
-				if(f_state:'move_transverse' == 'right',
-					print('- ÕıÔÚÏòÓÒÇ°·½×ß¨J')
+		if(f_state:'drop_stack' != null,
+			inner_sec = f_state:'drop_stack'/20;
+			print('- æ¯'+f_state:'drop_stack'+'æ¸¸æˆåˆ»ï¼ˆ'+inner_sec+'æ¸¸æˆç§’ï¼‰æ‰”1ç»„ç‰©å“')
+		);
+		//è·³è·ƒ
+		if(f_state:'jump' != null,
+			if(f_state:'jump' == 1,
+				print('- æ­£åœ¨æŒç»­è·³è·ƒ')
+			);
+			if(f_state:'jump' > 1,
+				inner_sec = f_state:'jump'/20;
+				print('- æ¯'+f_state:'jump'+'æ¸¸æˆåˆ»ï¼ˆ'+inner_sec+'æ¸¸æˆç§’ï¼‰å°è¯•è·³è·ƒä¸€æ¬¡')
+			)
+		);
+		//æ¢æ‰‹
+		if(f_state:'swap_hands' != null,
+			inner_sec = f_state:'swap_hands'/20;
+			print('- æ¯'+f_state:'swap_hands'+'æ¸¸æˆåˆ»ï¼ˆ'+inner_sec+'æ¸¸æˆç§’ï¼‰äº¤æ¢ä¸€æ¬¡å·¦å³æ‰‹çš„ç‰©å“')
+		);
+		//ä½¿ç”¨ç‰©å“
+		if(f_state:'use' != null,
+			if(f_state:'use' == 1,
+				print('- æ­£åœ¨æŒç»­ä½¿â™‚ç”¨ç‰©å“')
+			);
+			if(f_state:'use' > 1,
+				inner_sec = f_state:'use'/20;
+				print('- æ¯'+f_state:'use'+'æ¸¸æˆåˆ»ï¼ˆ'+inner_sec+'æ¸¸æˆç§’ï¼‰å°è¯•ä½¿ç”¨ä¸€æ¬¡ç‰©â™‚å“')
+			)
+		);
+		//ç§»åŠ¨**********************************é‡ç‚¹*********************************
+		if(f_state:'move_vertical' != null || f_state:'move_transverse' != null,
+			if(inner_sneak == true,
+				if(f_state:'move_vertical' == 'forward',
+					if(f_state:'move_transverse' == 'right',
+						print('- æ­£åœ¨å‘å³å‰æ–¹æ½œè¡Œâ†—')
+					);
+					if(f_state:'move_transverse' == 'left',
+						print('- æ­£åœ¨å‘å·¦å‰æ–¹æ½œè¡Œâ†–')
+					);
+					if(f_state:'move_transverse' == null,
+						print('- æ­£åœ¨å‘å‰æ½œè¡Œâ†‘');
+					)
 				);
-				if(f_state:'move_transverse' == 'left',
-					print('- ÕıÔÚÏò×óÇ°·½×ß¨I')
-				);
-				if(f_state:'move_transverse' == null,
-					print('- ÕıÔÚÏòÇ°×ß¡ü');
+				if(f_state:'move_vertical' == 'backward',
+					if(f_state:'move_transverse' == 'right',
+						print('- æ­£åœ¨å‘å³åæ–¹æ½œè¡Œâ†˜')
+					);
+					if(f_state:'move_transverse' == 'left',
+						print('- æ­£åœ¨å‘å·¦åæ–¹æ½œè¡Œâ†™')
+					);
+					if(f_state:'move_transverse' == null,
+						print('- æ­£åœ¨å‘åæ½œè¡Œâ†“');
+					)
 				)
 			);
-			if(f_state:'move_vertical' == 'backward',
-				if(f_state:'move_transverse' == 'right',
-					print('- ÕıÔÚÏòÓÒºó·½×ß¨K')
+			if(inner_sprint == true,
+				if(inner_swim == true,
+					if(f_state:'move_vertical' == 'forward',
+						if(f_state:'move_transverse' == 'right',
+							print('- æ­£åœ¨å‘å³å‰æ–¹æ¸¸æ³³â†—')
+						);
+						if(f_state:'move_transverse' == 'left',
+							print('- æ­£åœ¨å‘å·¦å‰æ–¹æ¸¸æ³³â†–')
+						);
+						if(f_state:'move_transverse' == null,
+							print('- æ­£åœ¨å‘å‰æ¸¸æ³³â†‘');
+						)
+					);
+					if(f_state:'move_vertical' == 'backward',
+						if(f_state:'move_transverse' == 'right',
+							print('- æ­£åœ¨å‘å³åæ–¹æ¸¸æ³³â†˜')
+						);
+						if(f_state:'move_transverse' == 'left',
+							print('- æ­£åœ¨å‘å·¦åæ–¹æ¸¸æ³³â†™')
+						);
+						if(f_state:'move_transverse' == null,
+							print('- æ­£åœ¨å‘åæ¸¸æ³³â†“');
+						)
+					)
 				);
-				if(f_state:'move_transverse' == 'left',
-					print('- ÕıÔÚÏò×óºó·½×ß¨L')
+				if(inner_swim == false,
+					if(f_state:'move_vertical' == 'forward',
+						if(f_state:'move_transverse' == 'right',
+							print('- æ­£åœ¨å‘å³å‰æ–¹ç–¾è·‘â†—')
+						);
+						if(f_state:'move_transverse' == 'left',
+							print('- æ­£åœ¨å‘å·¦å‰æ–¹ç–¾è·‘â†–')
+						);
+						if(f_state:'move_transverse' == null,
+							print('- æ­£åœ¨å‘å‰ç–¾è·‘â†‘');
+						)
+					);
+					if(f_state:'move_vertical' == 'backward',
+						if(f_state:'move_transverse' == 'right',
+							print('- æ­£åœ¨å‘å³åæ–¹ç–¾è·‘â†˜Â§eï¼ˆæ²¡é”™å®ƒå¯ä»¥å¼€æŒ‚ï¼‰')
+						);
+						if(f_state:'move_transverse' == 'left',
+							print('- æ­£åœ¨å‘å·¦åæ–¹ç–¾è·‘â†™Â§eï¼ˆæ²¡é”™å®ƒå¯ä»¥å¼€æŒ‚ï¼‰')
+						);
+						if(f_state:'move_transverse' == null,
+							print('- æ­£åœ¨å‘åç–¾è·‘â†“Â§eï¼ˆæ²¡é”™å®ƒå¯ä»¥å¼€æŒ‚ï¼‰');
+						)
+					)
 				);
-				if(f_state:'move_transverse' == null,
-					print('- ÕıÔÚÏòºó×ß¡ı');
-				)
+				
 			);
+			if(inner_sprint == false && inner_sneak == false,
+				if(f_state:'move_vertical' == 'forward',
+					if(f_state:'move_transverse' == 'right',
+						print('- æ­£åœ¨å‘å³å‰æ–¹èµ°â†—')
+					);
+					if(f_state:'move_transverse' == 'left',
+						print('- æ­£åœ¨å‘å·¦å‰æ–¹èµ°â†–')
+					);
+					if(f_state:'move_transverse' == null,
+						print('- æ­£åœ¨å‘å‰èµ°â†‘');
+					)
+				);
+				if(f_state:'move_vertical' == 'backward',
+					if(f_state:'move_transverse' == 'right',
+						print('- æ­£åœ¨å‘å³åæ–¹èµ°â†˜')
+					);
+					if(f_state:'move_transverse' == 'left',
+						print('- æ­£åœ¨å‘å·¦åæ–¹èµ°â†™')
+					);
+					if(f_state:'move_transverse' == null,
+						print('- æ­£åœ¨å‘åèµ°â†“');
+					)
+				);
+			)
+		);
+		if(f_state:'move_vertical' == null && f_state:'move_transverse' == null && inner_sneak == true,
+			print('- æ­£åœ¨æ½œè¡Œ')
+		);
+		if(f_state:'move_vertical' == null && f_state:'move_transverse' == null && inner_sprint == true && inner_swim == false,
+			print('- æ­£åœ¨åŸåœ°ç–¾è·‘')
+		);
+		if(f_state:'move_vertical' == null && f_state:'move_transverse' == null && inner_swim == true,
+			print('- æ­£åœ¨åŸåœ°æ¸¸æ³³')
 		)
-	);
-	if(f_state:'move_vertical' == null && f_state:'move_transverse' == null && inner_sneak == true,
-		print('- ÕıÔÚÇ±ĞĞ')
-	);
-	if(f_state:'move_vertical' == null && f_state:'move_transverse' == null && inner_sprint == true && inner_swim == false,
-		print('- ÕıÔÚÔ­µØ¼²ÅÜ')
-	);
-	if(f_state:'move_vertical' == null && f_state:'move_transverse' == null && inner_swim == true,
-		print('- ÕıÔÚÔ­µØÓÎÓ¾')
 	);
 	''
 );
@@ -769,7 +769,7 @@ checkall() ->(
 		i += 1
 	);
 	if(do_fake_player != 1,
-		print('¡ì4µ±Ç°ÎŞ¼ÙÈË')
+		print('Â§4å½“å‰æ— å‡äºº')
 	);
 	''
 );
