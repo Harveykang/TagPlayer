@@ -156,6 +156,7 @@ __player_list(i,player_list) ->(
 );
 __on_player_disconnects(player, reason) ->(
 	if(scoreboard('carpetBot', player) == 1,
+		scoreboard_remove('actimeCounter', player);
 		__delete_all_files(player);
 		scoreboard_remove('carpetBot', player);
 		run('team leave '+ player)
@@ -209,7 +210,8 @@ summon(player_name) ->(
 	);
 	f_player = player(player_name);
 	if (!f_player,
-		exit('§4生成失败')
+		print('§4生成失败');
+		return()
 	);
 	__delete_all_files(f_player);
 	run('team join carpetBot '+ f_player);
@@ -220,7 +222,6 @@ summon(player_name) ->(
 kill(player_name) ->(
 	f_player = player(player_name);
 	__check_offline(player_name);
-	scoreboard_remove('actimeCounter', f_player);
 	run(str('player %s kill', f_player));
 	game_tick(50);
 	run('tellraw @a {"text":"↑假的"}');
@@ -234,16 +235,15 @@ killall() ->(
 		if(one_player_str == '',
 			break()
 		);
-		if(query(player(one_player_str),'has_tag',global_tag),
+		if(scoreboard('carpetBot', one_player_str) == 1,
 			do_fake_player = 1
 		);
-		scoreboard_remove('actimeCounter', one_player_str);
 		run(str('player %s kill', one_player_str));
-		delete_file(one_player_str, 'text');
 		i += 1
 	);
 	if(do_fake_player != 1,
-		exit('§4不存在假人');
+		print('§4不存在假人');
+		return()
 	);
 	game_tick(50);
 	run('tellraw @a {"text":"已清除全部假人"}');
@@ -656,7 +656,7 @@ tp(player_name, position) ->(
 	y = position:1;
 	if(y>4096 || y<-4096,
 		print('§4y值不能超过±4096！');
-		exit()
+		return()
 	);
 	z = position:2;
 	print(s_player~'yaw'+'|'+s_player~'pitch');
@@ -673,7 +673,7 @@ tp_with_rotation(player_name, position, rotation) ->(
 	y = position:1;
 	if(y>4096 || y<-4096,
 		print('§4y值不能超过±4096！');
-		exit()
+		return()
 	);
 	z = position:2;
 	yaw = (rotation:1)%360;
@@ -700,7 +700,7 @@ tp_to_player(player_name, target_name) ->(
 	s_player = player(target_name);
 	if (!s_player,
 		print('§4玩家未在线');
-		exit()
+		return()
 	);
 	run(str('tp %s %s', f_player, s_player));
 	print(str('已将'+player_name+'传送至'+s_player));
@@ -714,7 +714,7 @@ tp_at_bot(player_name, position) ->(
 	y = position:1;
 	if(y>4096 || y<-4096,
 		print('§4y值不能超过±4096！');
-		exit()
+		return()
 	);
 	z = position:2;
 	print(s_player~'yaw'+'|'+s_player~'pitch');
@@ -731,7 +731,7 @@ tp_at_bot_with_rotation(player_name, position, rotation) ->(
 	y = position:1;
 	if(y>4096 || y<-4096,
 		print('§4y值不能超过±4096！');
-		exit()
+		return()
 	);
 	z = position:2;
 	yaw = (rotation:1)%360;
