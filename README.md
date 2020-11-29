@@ -1,7 +1,7 @@
 # TagPlayer
 FZ'sDatapack的地毯脚本  
 用于避免假人被记入记分板  
-#### 0.1.x需要:  
+#### 0.1.0需要:  
 FZ'sDatapack-1.4.x: https://github.com/Harveykang/FZ-sDataPack/releases  
 CarpetMod1.3.2或以上版本: https://github.com/gnembon/fabric-carpet/releases  
 ##### 使用“/tagplayer”查看帮助，此处不赘述
