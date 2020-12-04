@@ -9,4 +9,4 @@ CarpetMod1.3.2或以上版本: https://github.com/gnembon/fabric-carpet/releases
 ###### 如果出现乱码请转为ANSI编码试试
 #### 2.0.x需要:  
 FZ'sDatapack-2.0.x: https://github.com/Harveykang/FZ-sDataPack/releases  
-CarpetMod1.4.15或以上版本: https://github.com/gnembon/fabric-carpet/releases  
+CarpetMod1.4.18或以上版本: https://github.com/gnembon/fabric-carpet/releases  
